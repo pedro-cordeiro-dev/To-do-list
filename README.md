@@ -14,7 +14,10 @@ O projeto vai além de um CRUD simples, implementando um sistema de **alertas em
   * **🤖 Integração com Telegram Bot:**
       * Vínculo automático de conta (sem necessidade de digitar ID manualmente).
       * Notificações formatadas com Markdown (Negrito, Emojis).
-  * **📧 Integração com E-mail:** Envio de alertas via SMTP (Gmail).
+  * **📧 Poderoso Sistema de E-mail (Spring Mail):**
+    * Utiliza a biblioteca `spring-boot-starter-mail` para conexão SMTP robusta.
+    * Envio de alertas detalhados (com formatação de dados) sempre que uma tarefa é criada ou concluída.
+    * Configuração segura utilizando **Senhas de App** do Google.
   * **⚙️ Configuração Dinâmica:** Painel de configuração no Front-end para definir e-mail e Telegram em tempo de execução (salvos no banco).
   * **🎨 Front-end Moderno:** Interface responsiva, filtros de status (Pendentes/Concluídos) e feedback visual.
 
@@ -63,7 +66,8 @@ spring.datasource.password=
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 spring.mail.username=SEU_EMAIL@gmail.com
-spring.mail.password=SUA_SENHA_DE_APP_AQUI
+# Use a SENHA DE APP gerada (16 letras), não sua senha pessoal!
+spring.mail.password=xxxx xxxx xxxx xxxx
 
 # Configuração do Telegram
 telegram.bot.token=SEU_TOKEN_DO_BOTFATHER_AQUI
@@ -114,7 +118,14 @@ Um dos diferenciais do projeto é o vínculo automático ("Magic Link") com o Te
 
 ## 📸 Screenshots
 
-<img width="801" height="855" alt="image" src="https://github.com/user-attachments/assets/31edeb1b-92a1-4d64-8014-f22fa80f8c63" />
+### Imagem web
+<img width="601" height="655" alt="image" src="https://github.com/user-attachments/assets/31edeb1b-92a1-4d64-8014-f22fa80f8c63" />
+
+### Imagem Telegram
+<img width="700" height="309" alt="image" src="https://github.com/user-attachments/assets/91a43759-19c1-45f0-940c-a88686575c98" />
+
+### Imagem e-mail
+<img width="402" height="302" alt="image" src="https://github.com/user-attachments/assets/f66c0a64-1055-41de-a9ba-e08e867a1d03" />
 
 -----
 
