@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">
+            <i class="fas fa-check-double"></i>
+            <h1>TaskMaster</h1>
+        </div>
+        <p class="subtitle">Organize suas tarefas e receba notificações inteligentes.</p>
+    </header>
+
+    <section class="config-panel">
+        <div class="config-header">
+            <i class="fas fa-sliders-h"></i> Configurações de Notificação
+        </div>
+
+        <div class="config-grid">
+            <div class="config-card">
+                <label><i class="far fa-envelope"></i> E-mail de Alerta</label>
+                <div class="input-group">
+                    <input type="email" id="configEmail" placeholder="seu@email.com">
+                    <button onclick="saveEmail()" title="Salvar E-mail">
+                        <i class="fas fa-save"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="config-card">
+                <label><i class="fab fa-telegram-plane"></i> Integração Telegram</label>
+                <div class="telegram-actions">
+                    <a href="https://t.me/AvisosToDo_bot?start=vincular" target="_blank" class="btn-outline">
+                        1. Abrir Bot
+                    </a>
+                    <button onclick="linkTelegram()" class="btn-solid">
+                        2. Vincular
+                    </button>
+                </div>
+                <small>Abra o bot, clique em "Começar" e depois em "Vincular".</small>
+            </div>
+        </div>
+    </section>
+
+    <main>
+
+        <form id="taskForm" autocomplete="off">
+            <div class="form-header">Nova Tarefa</div>
+
+            <span class="error" id="error"></span>
+
+            <div class="input-wrapper">
+                <label for="desc">Descrição</label>
+                <input type="text" id="desc" maxlength="96" required placeholder="Ex: Apresentação do Projeto">
+            </div>
+
+            <div class="row">
+                <div class="input-wrapper">
+                    <label for="date">Data</label>
+                    <input type="date" id="date" required />
+                </div>
+                <div class="input-wrapper">
+                    <label for="time">Hora</label>
+                    <input type="time" id="time" required />
+                </div>
+            </div>
+
+            <button type="submit" class="btn-add">
+                <i class="fas fa-plus"></i> Adicionar Tarefa
+            </button>
+        </form>
+
+        <div class="toolbar">
+            <div class="filters">
+                <button class="filter-btn active" data-status="all">Todos</button>
+                <button class="filter-btn" data-status="pending">Pendentes</button>
+                <button class="filter-btn" data-status="completed">Concluídos</button>
+            </div>
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Buscar...">
+            </div>
+        </div>
+
+        <div id="list" class="task-list">
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" alt="Vazio">
+            <p>Nenhuma tarefa encontrada.</p>
+        </div>
+    </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

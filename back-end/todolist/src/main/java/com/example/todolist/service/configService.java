@@ -22,8 +22,21 @@ public class configService {
         configRepository.save(config);
     }
 
-    public Optional<String> buscarEmail() {
-        return configRepository.findById(CONFIG_ID).map(config -> config.getEmail()).filter(email -> email != null && !email.isBlank());
+    public void salvarTelegramId(String telegramId) {
+        config config = configRepository.findById(CONFIG_ID).orElse(new config());
+        config.setTelegramChatId(telegramId);
+        configRepository.save(config);
     }
 
+    public Optional<String> buscarTelegramId() {
+        return configRepository.findById(CONFIG_ID)
+                .map(config::getTelegramChatId)
+                .filter(id -> id != null && !id.isBlank());
+    }
+
+    public Optional<String> buscarEmail() {
+        return configRepository.findById(CONFIG_ID)
+                .map(config::getEmail)
+                .filter(email -> email != null && !email.isBlank());
+    }
 }
