@@ -13,6 +13,8 @@ public class config {
 
     private String email;
 
+    private String telegramChatId;
+
     public config(Long id, String email) {
         this.id = id;
         this.email = email;
@@ -35,5 +37,13 @@ public class config {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelegramChatId() {
+        return telegramChatId;
+    }
+
+    public void setTelegramChatId(String telegramChatId) {
+        this.telegramChatId = telegramChatId;
     }
 }

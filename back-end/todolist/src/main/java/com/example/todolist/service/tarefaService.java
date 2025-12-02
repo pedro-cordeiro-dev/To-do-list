@@ -20,10 +20,14 @@ public class tarefaService {
 
     private final TarefaRepository tarefaRepositorio;
     private final emailService emailService;
+    private final TelegramService telegramService;
 
-    public tarefaService(TarefaRepository tarefaRepositorio, emailService emailService) {
+    public tarefaService(TarefaRepository tarefaRepositorio,
+                         emailService emailService,
+                         TelegramService telegramService) {
         this.tarefaRepositorio = tarefaRepositorio;
         this.emailService = emailService;
+        this.telegramService = telegramService;
     }
 
     public TarefaResponse criarTarefa(criarTarefaRequest request) {
@@ -34,6 +38,12 @@ public class tarefaService {
             emailService.enviarEmailTarefaCriada(tarefaSalva);
         } catch (Exception e) {
             logger.error("!!! ERRO CRÍTICO AO TENTAR CHAMAR O EMAILSERVICE (Criação) !!!", e);
+        }
+
+        try {
+            telegramService.enviarNotificacaoTarefaCriada(tarefaSalva);
+        } catch (Exception e) {
+            logger.error("!!! ERRO CRÍTICO AO TENTAR CHAMAR O TELEGRAMSERVICE (Criação) !!!", e);
         }
 
         return TarefaResponse.entidade(tarefaSalva);
@@ -58,10 +68,17 @@ public class tarefaService {
         tarefa tarefaAtualizada = tarefaRepositorio.save(tarefaDoBanco);
 
         if (!estavaConcluida && tarefaAtualizada.isStatus()) {
+
             try {
                 emailService.enviarEmailTarefaConcluida(tarefaAtualizada);
             } catch (Exception e) {
                 logger.error("!!! ERRO CRÍTICO AO CHAMAR EMAILSERVICE (Conclusão) !!!", e);
+            }
+
+            try {
+                telegramService.enviarNotificacaoTarefaConcluida(tarefaAtualizada);
+            } catch (Exception e) {
+                logger.error("!!! ERRO CRÍTICO AO CHAMAR TELEGRAMSERVICE (Conclusão) !!!", e);
             }
         }
 
